@@ -1,0 +1,135 @@
+<p><a href="https://mybinder.org/v2/gh/fangohr/coronavirus-2020/master?filepath=index.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Binder" /></a></p>
+<p>Dashboard: <a href="https://mybinder.org/v2/gh/fangohr/coronavirus-2020/master?urlpath=voila%2Frender%2Fdashboard.ipynb"><img src="https://mybinder.org/badge_logo.svg" alt="Voila" /></a></p>
+<h1 id="coronavirus-2020---how-effective-are-our-measures-to-slow-down-the-virus">Coronavirus 2020 - how effective are our measures to slow down the virus?</h1>
+<h2 id="available-materials">Available materials</h2>
+<ul>
+<li><p><a href="https://fangohr.github.io/coronavirus/index-world.html">Plots and basic data tables for all countries for which the Johns Hopkins University provides data</a></p></li>
+<li><p><a href="https://fangohr.github.io/coronavirus/index-germany.html">Plots and basic data tables for all “Kreise” in Germany (based on data from Robert Koch Institute)</a></p></li>
+<li><p>Selected Plots for strongly affected countries (discussion below), see <a href="https://github.com/fangohr/coronavirus-2020/blob/master/index.ipynb">index.ipynb</a> (<a href="https://nbviewer.jupyter.org/github/fangohr/coronavirus-2020/blob/master/index.ipynb">faster version if it works</a>)</p></li>
+<li><p>Plots for states in Germany (and Pinneberg) - experimental: <a href="https://github.com/fangohr/coronavirus-2020/blob/master/germany.ipynb">germany.ipynb</a> (<a href="https://nbviewer.jupyter.org/github/fangohr/coronavirus-2020/blob/master/germany.ipynb">faster version if it works</a>)</p></li>
+<li><p>An example plot for South Korea is shown below, following by a brief discussion/description of the different plots.</p></li>
+<li><p>All of the plots and tables can be recomputed using the Binder service (link in each webpage, or use <a href="https://mybinder.org/v2/gh/fangohr/coronavirus/master">go here and select the relevant notebook yourself</a>.</p></li>
+</ul>
+<h2 id="data-source-and-processing">Data source and processing</h2>
+<ul>
+<li>We use data from the <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data">Johns Hopkins university</a> for countries,</li>
+<li>and from the <a href="https://npgeo-corona-npgeo-de.hub.arcgis.com/">German Robert Koch Insitute (RKI)</a> for data within Germany.</li>
+<li>All computational steps and code are available <a href="https://github.com/fangohr/coronavirus-2020/blob/master/coronavirus.py">here</a> – contributions and corrections welcome.</li>
+</ul>
+<h2 id="motivation">Motivation</h2>
+<h3 id="understanding-the-situation">Understanding the situation</h3>
+<p>The reporting in the media on the #COVID19 situation is not always providing sufficient context to interpret the numbers: we hear many news reports about how many people have been confirmed to be infected by the virus, or have died on a particular day.</p>
+<p>The relevant questions are though: how do these numbers compare to yesterday, and the week before? Can we see and understand how quickly infections are spreading? Can we see if the containment measures of people staying at home, schools and universities closing etc are showing any effect and if so, how strong is it? What can we learn from countries that have managed to reduce the number of new infections?</p>
+<p>With the plots and data available here, we hope to contribute to this.</p>
+<p>Discussion and contributions are welcome.</p>
+<h3 id="preparing-for-later-stages-of-the-outbreaks">Preparing for later stages of the outbreaks</h3>
+<p>Once the epidemic growth of infections is brought under control, we will need to find a fine balance between measures (such as social distancing, closure of schools, restaurants, shops, etc) and permitting work and live as was possible before the pandemic to avoid repeated exponential growth of infections.</p>
+<p>We can start to see this in the data for countries such as China and South Korea. We need to learn to better read these data. It will be essential to monitor such indicators for some time (months or years?) to come.</p>
+<h3 id="enable-citizen-science">Enable citizen science</h3>
+<ul>
+<li><p>The <a href="https://github.com/fangohr/coronavirus-2020">source code</a> that creates the plots is available here, can be inspected, downloaded, modified and improved.</p></li>
+<li><p>Using <a href="https://jupyter.org/">Jupyter Notebooks</a> and the <a href="https://mybinder.org">MyBinder project</a> project, anyone with a web browser can execute the source (to create the same or new plots) from within a web browser, by clicking <a href="https://mybinder.org/v2/gh/fangohr/coronavirus/master">this link</a>.</p></li>
+</ul>
+<h2 id="plans-and-contributions">Plans and contributions</h2>
+<p>Contributions are welcome</p>
+<ul>
+<li><p>We gather some <a href="https://github.com/fangohr/coronavirus-2020/blob/master/ideas.md">ideas</a> for further analysis and features that would be nice or useful.</p></li>
+<li><p>For those with programming and software engineering skills, there is a document <a href="https://github.com/fangohr/coronavirus-2020/blob/master/info.md">info.md</a> with more details about the project and a <a href="https://github.com/fangohr/coronavirus-2020/blob/master/todo.md">todo list</a>.</p></li>
+<li><p>Bugs and ideas can be reported as a <a href="https://github.com/fangohr/coronavirus-2020/blob/master/issues">“New issue”</a> – a github account is necessary.</p></li>
+</ul>
+<h1 id="discussion-of-example-plots">Discussion of example plots</h1>
+<p><img src="figures/Korea--South.svg" alt="south-korea data" /> <img src="figures/Korea--South2.svg" alt="south-korea data 2" /></p>
+<ul>
+<li>Discussion of plots from the top (number 1) to the bottom (number 7)</li>
+</ul>
+<h3 id="plot-1-accumulated-cases-and-deaths-as-function-of-time">Plot 1: accumulated cases and deaths as function of time</h3>
+<ul>
+<li>Shows how many people have been confirmed to be infected (blue) or have died (red) as a function of time.</li>
+<li>The y-axis is logarithmic, that means from one grid line to the next, the value represented increases by a factor of 10. (Axis labels: 10<sup>2</sup>= 100, 10<sup>3</sup>= 1000, 10<sup>4</sup>= 10000, and so on).</li>
+<li>These numbers are generally reported in the media.</li>
+<li>These numbers can only grow.</li>
+<li>The interesting question is: how fast do they grow?</li>
+</ul>
+<h3 id="plot-2-daily-changes-in-cases">Plot 2: daily changes in cases</h3>
+<ul>
+<li>Shows how many new confirmed cases are reported per day, shown as blue bars.</li>
+<li>Blue lines shows a seven day (rolling) average over the bar data - this produces smoother data, and in particular removes the effect of the weekend (in some countries reported numbers drop during and just after the weekend)</li>
+<li>We would like to see these numbers of daily changes decrease from day to day. The faster they go down the better.</li>
+<li>For the data of South Korea, we can see that the peak of new infections was around 1st March 2020, and following that the number of new infections decreased to around 100 per day for the second half of March.</li>
+</ul>
+<h3 id="plot-3-daily-changes-in-deaths">Plot 3: daily changes in deaths</h3>
+<ul>
+<li>Red bars shows how many new deaths were reported for each day.</li>
+<li>Red line shows a seven day (rolling) average over the bar data.</li>
+<li>The number of deaths is expected to follow the number of infections with some time delay, and reduced by a fraction (the <a href="https://en.wikipedia.org/wiki/Case_fatality_rate">case fatality rate</a>).</li>
+</ul>
+<h3 id="plot-4-growth-factors">Plot 4: growth factors</h3>
+<ul>
+<li>The growth factor is the ratio of new cases (or deaths) today relative to new cases (or deaths) yesterday</li>
+<li>Blue (red) dots show these ratios for cases (deaths), and are computed as the ratio over a week to reduce noise</li>
+<li>The solid line is a 7-day rolling mean over these points to provide smoother data.</li>
+<li>As long as the growth value is greater than 1.0, the number of new infections is increasing</li>
+<li>If the growth value would is exactly 1.0, we have the same number of new infections every day</li>
+<li>The growth factor needs to be below 1.0 for the spread to slow down.</li>
+<li>As this number is computed on the relative change from yesterday to today, we can get high fluctuations where the numbers of new cases and deaths is small (imagine there was 1 case yesterday, and 7 cases today, this would give a growth factor of 7).</li>
+</ul>
+<h3 id="plot-5-doubling-times">Plot 5: Doubling times</h3>
+<ul>
+<li><p>This plot computes the doubling time of the cases (blue) and deaths (red), assuming that the growth of cases and deaths as shown in plot 1 is exponential.</p>
+<ul>
+<li><p>in more detail, we compute the doubling period from one day to the next and show this as transparent dots.</p>
+<p>If a value of 3 is shown, this means that at that point in time, it took 3 days for the numbers of cases (or deaths) to double.</p></li>
+<li><p>the solid line is a 7-day rolling mean over these data points and provides more robust guidance.</p></li>
+</ul></li>
+<li><p>Looking at the solid lines, we may be able to assess the spread of the virus.</p>
+<ul>
+<li><p>For many countries, in the early stages of the outbreak, this doubling time for confirmed infections (blue line) is somewhere around 2 to 3 days.</p></li>
+<li><p>As the spread of infections is reduced (by schools closing, people exercising social distancing, staying at home, etc), the growth rate of the exponential function becomes smaller, and correspondingly the doubling time increases.</p></li>
+<li><p>We would like to see the doubling time to get larger, as this an indication that the growth of infections and deaths is decreasing.</p></li>
+<li><p>Hopefully, we can learn from other countries, what kind of doubling period has to be achieved, to control the number of infected people.</p></li>
+</ul></li>
+<li><p>The example data for South Korea shows that the doubling time grows from around 3 days to around 60 days as the number of daily new infections (plot 2) decreases.</p>
+<ul>
+<li><p>as the doubling period reaches 60, the number of daily new infections stabilises around 100.</p></li>
+<li><p>There is no red curve for the doubling time of deaths as there have been too few deaths to be useful for the analysis.</p></li>
+</ul></li>
+</ul>
+<h3 id="plot-6-comparison-of-daily-new-cases-with-other-countries">Plot 6: Comparison of daily new cases with other countries</h3>
+<ul>
+<li><p>X-axis shows the number of days since a particular number of new cases per day (such as 10) have occurred in that country, and the y-axis the number of new cases for that day.</p></li>
+<li><p>We see that countries follow similar paths, with the common properties that the curve increases until the number of cases per day peaks, and then the curve comes down again.</p></li>
+<li><p>The y-axis is logarithmic.</p></li>
+<li><p>Due to the logarithmic y-axis, this visualisation can help to understand at what stage in the outbreak an area is (despite the different size of the countries and numbers of cases).</p></li>
+<li><p>The curve shows as 7-day rolling mean to provide a smoother line than the noisier individual data points (in particular with fewer cases per day). This leads to non-integer values.</p></li>
+</ul>
+<h3 id="plot-7-comparison-of-daily-new-deaths-with-other-countries">Plot 7: Comparison of daily new deaths with other countries</h3>
+<ul>
+<li>As Plot 6, but for deaths not cases. For South Korea, there are not enough deaths per day to show a meaningful line here.</li>
+</ul>
+<h1 id="what-about-errors-in-the-data">What about errors in the data?</h1>
+<ul>
+<li>The data we have available is likely to be in accurate:
+<ul>
+<li>Infections can only be confirmed if they are being tested: the more testing takes place, the more infected people can be found. Asymptomatic individuals may not be tested if tests are prioritised for severely sick, health workers or those showing symptoms.</li>
+<li>Tests may be inaccurate and report false positives or false negatives.</li>
+<li>Deaths may be easier to detect than infections, but may also be inaccurate.</li>
+<li>The reporting of cases and deaths may not take place during weekends, or there may be delays for other reasons.</li>
+</ul></li>
+<li><p>Despite the errors in the data, we can try to learn something from it as long as we remember the data is not representing the full truth of the situation but just the measurement that we have available.</p>
+<ul>
+<li><p>For some plots, we have omitted data lines or points because there were not enough numbers and data points to estimate anything.</p></li>
+<li><p>Some data points appear random or as outliers - for some we understand the reasons, for others not.</p></li>
+</ul></li>
+<li><p>It is possible we have made errors in our processing of the numbers. The source code is available for anyone to check. (Please feedback any observations.)</p></li>
+</ul>
+<h1 id="disclaimer">Disclaimer</h1>
+<p>The plots and code here has been put together by volunteers who have no training in epidemiology. THere are likely to be errors in the processing. You are welcome to use the material at your own risk. The <a href="https://github.com/fangohr/coronavirus-2020/blob/master/LICENSE">license is available</a>.</p>
+<h1 id="acknowledgements">Acknowledgements</h1>
+<ul>
+<li>Johns Hopkins University provides data for countries</li>
+<li>Robert Koch Institute provides data for within Germany</li>
+<li>Open source and scientific computing community for the data tools</li>
+<li>Github for hosting repository and html files</li>
+<li>Project Jupyter for the Notebook and Binder service</li>
+<li>The H2020 project Photon and Neutron Open Science Cloud (<a href="https://www.panosc.eu/">PaNOSC</a>)</li>
+</ul>
