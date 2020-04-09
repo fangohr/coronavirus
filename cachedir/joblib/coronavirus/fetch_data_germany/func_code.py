@@ -1,4 +1,4 @@
-# first line: 138
+# first line: 157
 @joblib_memory.cache
 def fetch_data_germany():
     """Data source is https://npgeo-corona-npgeo-de.hub.arcgis.com . The text on the
@@ -41,4 +41,5 @@ def fetch_data_germany():
     last_day = g2.index.max()
     sel = g2.index == last_day
     cleaned = g2.drop(g2[sel].index, inplace=False)
+    fetch_data_germany_last_execution()
     return cleaned

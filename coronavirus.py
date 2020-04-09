@@ -2,6 +2,7 @@
 https://github.com/fangohr/coronavirus-2020"""
 
 
+import datetime
 import os
 import time
 import joblib
@@ -48,17 +49,31 @@ def report_download(url, df):
 
 
 @joblib_memory.cache
+def fetch_deaths_last_execution():
+    """Use to remember at what time and date the last set of deaths was downloaded"""
+    return datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+
+@joblib_memory.cache
+def fetch_cases_last_execution():
+    return datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+
+@joblib_memory.cache
 def fetch_deaths():
     url = os.path.join(base_url, "time_series_covid19_" + "deaths" + "_global.csv")
     df = pd.read_csv(url, index_col=1)
     report_download(url, df)
+    fetch_deaths_last_execution()
     return df
+
 
 @joblib_memory.cache
 def fetch_cases():
     url = os.path.join(base_url, "time_series_covid19_" + "confirmed" + "_global.csv")
     df = pd.read_csv(url, index_col=1)
     report_download(url, df)
+    fetch_cases_last_execution()
     return df
 
 
@@ -133,7 +148,11 @@ def compose_dataframe_summary(cases, deaths):
     df["total deaths"] = deaths
     df["daily new deaths"] = deaths.diff()
     return df
-    
+
+
+@joblib_memory.cache
+def fetch_data_germany_last_execution():
+    return datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 @joblib_memory.cache
 def fetch_data_germany():
@@ -177,6 +196,7 @@ def fetch_data_germany():
     last_day = g2.index.max()
     sel = g2.index == last_day
     cleaned = g2.drop(g2[sel].index, inplace=False)
+    fetch_data_germany_last_execution()
     return cleaned
 
 
@@ -272,6 +292,18 @@ def plot_doubling_time(ax, series, color, minchange=10):
     q2_div_q1.dropna(inplace=True)
     dtime = double_time_exponential(q2_div_q1, t2_minus_t1=1)
     dtime.dropna(inplace=True)
+
+    # exceptions:
+    #
+    # UK: data point on 15 March 2020 for only 1 new case, results in huge spike in doubling time (~790 days)
+    # drop this
+    if series.country == "United Kingdom" and series.label=="cases":
+        # print(dtime)
+        sel = dtime > 50
+        dtime.drop(dtime[sel].index, inplace=True)
+        print(f"Dropping UK data at {dtime[sel].index}, values are {dtime[sel]}")
+    # end of exceptions
+
     label = series.country + " new " + series.label
     ax.plot(dtime.index, dtime.values, 'o', color=color, alpha=0.3, label=label)
 
@@ -493,7 +525,10 @@ def make_compare_plot(main_country, compare_with=["China", "Italy", "US", "Korea
 def label_from_region_subregion(region_subregion):
     region, subregion = unpack_region_subregion(region_subregion)
     if subregion:
-        label = f"{region}-{subregion}"
+        if region:
+            label = f"{region}-{subregion}"
+        else:
+            label = f"{subregion}"
     else:
         label = f"{region}"
     return label
@@ -587,9 +622,16 @@ def make_compare_plot_germany(region_subregion,
                       "daily new cases\n(rolling 7-day mean)",
                       v0=v0c, highlight={res_c.columns[0]:"C1"}, labeloffset=0.5)
     ax = axes[1]
+
+    res_d_0 = res_d[res_d.index >= 0]   # from "day 0" only
+    # if we have values in between 0.1 and 1, set the lower `y_limit` on the graph to 0.1
+    if res_d_0[(res_d_0 > 0.1) & (res_d_0 < 1)].any().any():    # there must be a more elegant check
+        y_limit = 0.1
+    else:
+        y_limit = v0d
     plot_logdiff_time(ax, res_d, f"days since {v0d} deaths",
                       "daily new deaths\n(rolling 7-day mean)",
-                      v0=v0d, highlight={res_d.columns[0]:"C0"},
+                      v0=y_limit, highlight={res_d.columns[0]:"C0"},
                       labeloffset=0.5)
 
     fig.tight_layout(pad=1)
