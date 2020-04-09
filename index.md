@@ -1,6 +1,6 @@
 # Germany: Landkreise
 
-[Additional plots for Germany](index-germany.html])
+[Additional plots for Germany](index-germany.html)
 
 # World
 
