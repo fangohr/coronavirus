@@ -1,3 +1,7 @@
+# Open Science COVID19 tracker
+
+[Project home page](index.html)
+
 # Links to static pages for each Landkreis
 
 Landkreise in Germany
